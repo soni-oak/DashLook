@@ -1,0 +1,36 @@
+.headerstrip{
+  width: 100%;
+  position: fixed;
+  height: 80px;
+  background-color: #ffffff; 
+
+
+
+  /* Styling for links */
+  padding-top: 25px;
+  color: rgb(193, 193, 193);
+  font-weight: bold;
+}
+
+.headerstrip a {
+    color: #10100f;
+    font-size: large;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 25px;
+
+    transition: background-color 0.3s ease; 
+  }
+  
+  /* Style for the selected link */
+  .headerstrip a.selected {
+    color: #F99E1D;
+    
+    font-weight: bolder;
+  }
+  
+  /* Fade effect for other links */
+  .headerstrip a:not(.selected):hover {
+     /* Choose a fade color */
+     color: #f3b020
+  }

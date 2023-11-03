@@ -1,0 +1,7 @@
+<div class="dropdown"  style="width: 100%;">
+    <select [(ngModel)]="selectedModel" (change)="onSelectionChange()" class="dropdown-selector">
+        <option *ngFor="let option of options" [value]="option.displayName">{{option.displayName}}</option>
+    </select>
+  </div>
+
+  
