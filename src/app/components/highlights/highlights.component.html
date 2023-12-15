@@ -1,3 +1,9 @@
 <div class="highlights">
 <app-stats *ngFor="let stat of stats" [stat]="stat"></app-stats>
 </div>
+
+<div class="dropdown"  style="width: 100%;">
+    <select [(ngModel)]="selectedModel" (change)="onSelectionChange()" class="dropdown-selector">
+        <option *ngFor="let model of models" [value]="model.displayName">{{model.displayName}}</option>
+    </select>
+  </div>

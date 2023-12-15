@@ -1,3 +1,8 @@
+/* src/app/app.component.css */
+.container {
+  margin-left: 100px
+}
+
 body {
     position: relative;
     min-height: 100vh;

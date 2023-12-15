@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { connect, interval, map, switchMap, takeUntil, timer } from 'rxjs';
+import { Model } from 'src/app/Models';
 import { Stat } from 'src/app/Stat';
 import { HighlightService } from 'src/app/services/highlight.service';
 
@@ -8,24 +10,34 @@ import { HighlightService } from 'src/app/services/highlight.service';
   styleUrls: ['./highlights.component.css']
 })
 export class HighlightsComponent implements OnInit {
+
   stats: Stat[] = [];
-  @Input() selectedModel: string = '';
+ 
+  models: Model[] = []; 
+  selectedModel : string;
+  intervalId: any = null ;
 
   constructor(private service: HighlightService){}
 
-  ngOnInit(): void {
-    this.getNewHighlights();
+   ngOnInit() {
+     this.getModels().then(res => {
+      this.selectedModel = this.models[0].displayName;
+      this.getNewHighlights();
+      //this.scheduleCall();
+      
+     }
+    );
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.getNewHighlights();
-  }
+  
 
-  getNewHighlights(){
+  getNewHighlights(): void{
+    
     const data = {
       Model: this.selectedModel,
-      Company: "PayTM"
+      Company: "paytm"
     }
+    console.log(data);
     const arrayOfStats: Stat[] = [];
 
     this.service.getHighlights(data).subscribe(response => {
@@ -35,8 +47,35 @@ export class HighlightsComponent implements OnInit {
         arrayOfStats.push(stat);
       }
       this.stats = arrayOfStats;
-      // Here you can use the arrayOfStats as needed within the subscription block
     });
+    return;
   }
+
+  async getModels(): Promise<void> {
+    try {
+      const models = await this.service.getModels().toPromise();
+      console.log(models);
+      this.models = models!;
+      
+    } catch (error) {
+      // Handle errors here
+      console.error(error);
+    }
+  }
+
+  onSelectionChange() {
+    this.getNewHighlights();
+  }
+  
+
+  
+  scheduleCall(){
+    const timerObservable = timer(0, 20000); 
+
+      const subscription = timerObservable.pipe(
+        map(() => this.getNewHighlights())
+      ).subscribe();
+  }
+
 
 }

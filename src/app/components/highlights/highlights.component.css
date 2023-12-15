@@ -1,3 +1,19 @@
 .highlights{
     margin-top: 7%;
 }
+.dropdown {
+    position: fixed; /* Position the dropdown relative to the viewport */
+    display: inline-block;
+    width: 150px;
+    text-align: right; /* Align the text to the left */
+    top: 75px; /* Adjust the top position as needed */
+    right: 6%;
+  }
+  
+  .dropdown-selector {
+    width: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }

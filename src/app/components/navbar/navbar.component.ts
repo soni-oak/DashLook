@@ -16,4 +16,9 @@ export class NavbarComponent {
     { title: 'Pricing', link: '#' }
     // Add more navigation items as needed
   ];
+
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 }
